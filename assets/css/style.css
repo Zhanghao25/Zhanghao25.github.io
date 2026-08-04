@@ -1,25 +1,34 @@
 /* ===== CSS Variables ===== */
 :root {
   --bg: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text: #2c3e50;
-  --text-secondary: #6c757d;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --border: #e9ecef;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --bg-secondary: #f6f8fa;
+  --text: #1f2937;
+  --text-secondary: #5b6673;
+  --accent: #0e7490;
+  --accent-hover: #0c5f76;
+  --accent-soft: rgba(14, 116, 144, 0.09);
+  --accent-warm: #b45309;
+  --accent-warm-soft: rgba(180, 83, 9, 0.1);
+  --border: #e5e9ed;
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.07);
   --radius: 6px;
+  --nav-h: 44px;
+  --nav-bg: rgba(255, 255, 255, 0.72);
 }
 
 [data-theme="dark"] {
-  --bg: #1a1a2e;
-  --bg-secondary: #16213e;
-  --text: #e0e0e0;
-  --text-secondary: #a0aec0;
-  --accent: #60a5fa;
-  --accent-hover: #93c5fd;
-  --border: #2d3748;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --bg: #0f172a;
+  --bg-secondary: #1a2436;
+  --text: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --accent: #38bdf8;
+  --accent-hover: #7dd3fc;
+  --accent-soft: rgba(56, 189, 248, 0.14);
+  --accent-warm: #fbbf24;
+  --accent-warm-soft: rgba(251, 191, 36, 0.14);
+  --border: #2a3547;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --nav-bg: rgba(15, 23, 42, 0.72);
 }
 
 /* ===== Reset & Base ===== */
@@ -61,16 +70,11 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 90;
-  background: var(--bg);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background: rgba(255,255,255,0.88);
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px) saturate(1.4);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
   transition: background 0.3s;
-}
-
-[data-theme="dark"] .topnav {
-  background: rgba(26,26,46,0.92);
 }
 
 .topnav-inner {
@@ -80,7 +84,7 @@ a:hover {
   display: flex;
   gap: 0;
   align-items: center;
-  height: 44px;
+  height: var(--nav-h);
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -90,19 +94,18 @@ a:hover {
 }
 
 .topnav-inner a {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-secondary);
   text-decoration: none;
   padding: 0 0.85rem;
-  height: 44px;
+  height: var(--nav-h);
   display: flex;
   align-items: center;
   border-bottom: 2px solid transparent;
   white-space: nowrap;
   transition: color 0.2s, border-color 0.2s;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
 }
 
 .topnav-inner a:hover,
@@ -144,7 +147,7 @@ a:hover {
 /* ===== Theme Toggle ===== */
 .theme-toggle {
   position: fixed;
-  top: 54px;
+  top: calc(var(--nav-h) + 0.6rem);
   right: 1.2rem;
   z-index: 100;
   background: var(--bg-secondary);
@@ -267,13 +270,14 @@ section {
 }
 
 section h2 {
-  font-size: 1.2rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  color: var(--text);
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 2px solid var(--accent);
-  display: inline-block;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 section p {
@@ -284,6 +288,13 @@ section p {
   color: var(--text-secondary);
   font-size: 0.93rem;
   margin-bottom: 0.75rem;
+}
+
+.subhead {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 1.5rem 0 0.7rem;
 }
 
 /* ===== Papers ===== */
@@ -314,9 +325,64 @@ section p {
   color: var(--text-secondary);
 }
 
+.authors .me {
+  color: var(--text);
+  font-weight: 700;
+}
+
 .venue {
   font-size: 0.92rem;
   color: var(--text-secondary);
+}
+
+.venue-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  margin-right: 0.45rem;
+}
+
+.venue-tag--pub {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.venue-tag--equal {
+  color: var(--accent-warm);
+  background: var(--accent-warm-soft);
+}
+
+.venue-tag--review {
+  color: var(--accent-warm);
+  background: var(--accent-warm-soft);
+}
+
+.venue-tag--wp {
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+/* ===== Interest tags ===== */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tag {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 999px;
+  padding: 0.22rem 0.75rem;
 }
 
 /* ===== Notes (Xiaohongshu) ===== */
@@ -348,14 +414,99 @@ section p {
   margin-left: 1rem;
 }
 
-/* ===== Teaching ===== */
-.teaching-list {
+/* ===== Pagination ===== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+}
+
+.page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 0.5rem;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.page-btn:hover:not(:disabled):not(.active) {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--bg);
+  transform: translateY(-1px);
+}
+
+.page-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-prev,
+.page-next {
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+/* ===== Talks ===== */
+.talks-list {
   list-style: none;
   padding: 0;
 }
 
-.teaching-list li {
-  padding: 0.35rem 0;
+.talks-list li {
+  padding: 0.45rem 0;
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.talks-list li:last-child {
+  border-bottom: none;
+}
+
+.talk-main {
+  flex: 1;
+}
+
+.talk-note {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+/* ===== Timeline (Teaching / Education) ===== */
+.timeline {
+  list-style: none;
+  padding: 0 0 0 1.4rem;
+  margin-left: 0.35rem;
+  border-left: 2px solid var(--border);
+}
+
+.timeline li {
+  position: relative;
+  padding: 0.45rem 0;
   font-size: 0.95rem;
   display: flex;
   justify-content: space-between;
@@ -363,30 +514,26 @@ section p {
   gap: 1rem;
 }
 
-.teaching-main {
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.4rem - 7.5px);
+  top: 0.88rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  transition: background 0.3s;
+}
+
+.teaching-main,
+.edu-main {
   flex: 1;
 }
 
 .course {
   font-weight: 600;
-}
-
-/* ===== Education ===== */
-.edu-list {
-  list-style: none;
-  padding: 0;
-}
-
-.edu-list li {
-  padding: 0.4rem 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-}
-
-.edu-main {
-  flex: 1;
 }
 
 /* ===== Awards ===== */
@@ -403,6 +550,21 @@ section p {
   align-items: baseline;
   flex-wrap: wrap;
   gap: 0.3rem;
+}
+
+.awards-list .year {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.08rem 0.5rem;
+  border-radius: 999px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+}
+
+.awards-list + .section-desc {
+  margin-top: 0.9rem;
+  margin-bottom: 0;
+  font-size: 0.88rem;
 }
 
 /* ===== Year tags ===== */
@@ -462,16 +624,17 @@ footer p {
     font-size: 1.5rem;
   }
 
-  .teaching-list li,
-  .edu-list li,
+  .timeline li,
   .awards-list li,
+  .talks-list li,
   .notes-list li {
     flex-direction: column;
     gap: 0.1rem;
   }
 
   .teaching-main,
-  .edu-main {
+  .edu-main,
+  .talk-main {
     flex: unset;
     width: 100%;
   }
@@ -479,6 +642,21 @@ footer p {
   .year,
   .note-date {
     margin-left: 0;
+  }
+}
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
